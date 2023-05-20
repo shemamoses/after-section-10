@@ -77,6 +77,15 @@ const tourSchema = new mongoose.Schema(
     secretTour: {
       type: Boolean,
       default: false
+    },
+    startLocation: {
+      //Geojson
+      type:{
+        type: String,
+        default: 'point',
+        enum: ['']
+      },
+      coordinates:{}
     }
   },
   {
