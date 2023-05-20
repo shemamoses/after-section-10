@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const slugify = require('slugify');
 // const validator = require('validator');
+const User = require('./userModel');
 
 const tourSchema = new mongoose.Schema(
   {
@@ -82,8 +83,8 @@ const tourSchema = new mongoose.Schema(
       //Geojson
       type: {
         type: String,
-        default: 'point',
-        enum: ['point']
+        default: 'Point',
+        enum: ['Point']
       },
       coordinates: [Number],
       address: String,
@@ -94,8 +95,8 @@ const tourSchema = new mongoose.Schema(
         type: {
           type: {
             type: String,
-            default: 'point',
-            enum: ['point']
+            default: 'Point',
+            enum: ['Point']
           },
           coordinates: [Number],
           address: String,
@@ -121,6 +122,11 @@ tourSchema.pre('save', function(next) {
   next();
 });
 
+// tourSchema.pre('save', async function() {
+//   const guidePromises = this.guides.map(async id => User.findById(id));
+//   this.guides = await Promise.all(guidesPromises);
+//   next();
+// });
 // tourSchema.pre('save', function(next) {
 //   console.log('Will save document...');
 //   next();
