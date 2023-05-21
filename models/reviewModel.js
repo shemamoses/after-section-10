@@ -13,18 +13,14 @@ const reviewSchema = new mongoose.Schema(
       required: true
     },
     createdAt: {
-      type: date,
-      default: Date.now,
+      type: Date,
+      default: Date.now(),
       required: true
     },
     tour: {
       type: mongoose.Schema.ObjectId,
       ref: Tour,
       required: [true, 'Review must belong to a tour']
-    },
-    refUse: {
-      type: String,
-      required: true
     },
     user: {
       type: mongoose.Schema.ObjectId,
@@ -37,6 +33,11 @@ const reviewSchema = new mongoose.Schema(
     toObject: { virtuals: true }
   }
 );
+
+reviewSchema.pre(/^find/, function(next) {
+  this.populate({ path: tour });
+  next();
+});
 const Review = mongoose.model('Review', reviewSchema);
 
 module.exports = Review;
