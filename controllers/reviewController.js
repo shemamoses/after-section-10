@@ -1,6 +1,7 @@
 const AppError = require('../utils/appError');
 const Review = require('./../models/reviewModel');
 const catchAsync = require('./../utils/catchAsync');
+const factory = require('./handlerFactory');
 
 //get all reviews
 exports.getAllReviews = catchAsync(async (req, res, next) => {
@@ -32,3 +33,5 @@ exports.createReview = catchAsync(async (req, res, next) => {
 
   next(new AppError('unable to create a review!!!'));
 });
+
+exports.deleteReview = factory.deleteOne(Review);
