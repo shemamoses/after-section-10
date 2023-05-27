@@ -34,4 +34,5 @@ exports.createReview = catchAsync(async (req, res, next) => {
   next(new AppError('unable to create a review!!!'));
 });
 
+exports.updateReview = factory.updateOne(Review);
 exports.deleteReview = factory.deleteOne(Review);
