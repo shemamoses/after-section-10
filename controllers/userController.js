@@ -11,6 +11,11 @@ const filterObj = (obj, ...allowedFields) => {
   return newObj;
 };
 
+exports.getMe = (req, res, next) => {
+  req.params.id = req.user.id;
+  next();
+};
+
 exports.getAllUsers = catchAsync(async (req, res, next) => {
   const users = await User.find();
 
@@ -74,5 +79,5 @@ exports.createUser = (req, res) => {
   });
 };
 //do not update password with this
-exports.updateUser = factory.updateOne(User)
+exports.updateUser = factory.updateOne(User);
 exports.deleteUser = factory.deleteOne(User);
